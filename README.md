@@ -7,6 +7,9 @@ Copy code
 <details>
   <summary>Another</summary>
   <details>
-    <summary>ToDoApp</summary>
+    <summary>ToDo</summary>
+    <details>
+        <summary>App</summary>
+    </details>
   </details>
 </details>
