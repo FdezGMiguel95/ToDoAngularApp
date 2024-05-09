@@ -1,0 +1,88 @@
+<form
+  class="max-w-sm mx-auto"
+  #taskForm="ngForm"
+  (ngSubmit)="onSubmit(taskForm)"
+>
+  <div class="mb-5">
+    <label
+      for="task"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Your task</label
+    >
+    <input
+      type="text"
+      id="task"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+      placeholder="Your next task"
+      required
+      ngModel
+      name="task"
+    />
+  </div>
+  <div
+    *ngIf="taskForm.invalid && taskForm.dirty"
+    class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 text-center"
+    role="alert"
+  >
+    <span class="font-medium">Required!</span>
+  </div>
+
+  <div class="text-center mb-5 w-full">
+    <button
+      type="submit"
+      class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+      [disabled]="taskForm.invalid"
+    >
+      Submit
+    </button>
+  </div>
+</form>
+
+<div class="relative overflow-x-auto my-6">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-justify"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Task</th>
+        <th scope="col" class="px-6 py-3">Completed</th>
+        <th scope="col" class="px-6 py-3">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let task of tasks; index as i"
+        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
+      >
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+        >
+          {{ task.taskName }}
+        </th>
+        <td class="px-6 py-4">
+          <div class="flex items-center ps-3">
+            <input
+              (change)="onCheck(i)"
+              id="Completed"
+              type="checkbox"
+              value=""
+              class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500"
+            />
+          </div>
+        </td>
+        <td class="px-6 py-4">
+          <button
+            (click)="deleteTask(i)"
+            type="button"
+            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
